@@ -1,0 +1,47 @@
+{
+  "configurations" : [
+    {
+      "id" : "03C1D6A8-C3B6-4659-AACF-215387A51185",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-date"
+      },
+      {
+        "argument" : "2025-06-21T07:30:00Z"
+      },
+      {
+        "argument" : "-steps"
+      },
+      {
+        "argument" : "1000"
+      }
+    ],
+    "environmentVariableEntries" : [
+
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:HealthKitTestDataRegister.xcodeproj",
+      "identifier" : "BC641D282E011866006F2C30",
+      "name" : "HealthKitTestDataRegister"
+    },
+    "uiTestingScreenshotsLifetime" : "keepNever",
+    "userAttachmentLifetime" : "keepNever"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:HealthKitTestDataRegister.xcodeproj",
+        "identifier" : "BC641D3B2E0118D2006F2C30",
+        "name" : "HealthKitTestDataRegisterUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
