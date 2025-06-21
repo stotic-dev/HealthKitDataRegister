@@ -1,0 +1,2 @@
+# HealthKitDataRegister
+HealthKitで使用するデータを登録するツール
