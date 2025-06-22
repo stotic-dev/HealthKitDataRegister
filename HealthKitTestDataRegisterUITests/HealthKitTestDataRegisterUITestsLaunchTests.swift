@@ -18,10 +18,8 @@ final class HealthKitTestDataRegisterUITestsLaunchTests: XCTestCase {
     
     override func setUpWithError() throws {
         continueAfterFailure = false
-        
+        app.launchEnvironment = ProcessInfo.processInfo.environment
         app.resetAuthorizationStatus(for: .health)
-        
-        app.launchArguments = ProcessInfo.processInfo.arguments.dropFirst().map(\.self)
         app.launch()
     }
     

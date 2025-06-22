@@ -10,21 +10,13 @@
   ],
   "defaultOptions" : {
     "commandLineArgumentEntries" : [
-      {
-        "argument" : "-date"
-      },
-      {
-        "argument" : "2025-06-21T07:30:00Z"
-      },
-      {
-        "argument" : "-steps"
-      },
-      {
-        "argument" : "1000"
-      }
+
     ],
     "environmentVariableEntries" : [
-
+      {
+        "key" : "REGISTER_HEALTH_DATA",
+        "value" : "${REGISTER_HEALTH_DATA}"
+      }
     ],
     "targetForVariableExpansion" : {
       "containerPath" : "container:HealthKitTestDataRegister.xcodeproj",

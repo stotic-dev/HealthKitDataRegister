@@ -19,8 +19,13 @@ struct CommandLineArguments {
     let healthDataArray: [HealthData]
     
     static func parse() throws -> CommandLineArguments {
-        let args = ProcessInfo.processInfo.arguments.dropFirst()
-        print("args on parse: \(args)")
+        guard let environmentValue = ProcessInfo.processInfo.environment["REGISTER_HEALTH_DATA"] else {
+            
+            throw CommandLineError.invalidEnvironment
+        }
+        let args = environmentValue
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: .whitespaces) }
         var healthDataArray: [HealthData] = []
         
         // 引数のパース処理
@@ -51,8 +56,8 @@ struct CommandLineArguments {
                 }
                 
                 // 新しい日付の処理開始
-                guard index + 2 <= args.count,
-                      let date = dateFormatter.date(from: args[index + 2])
+                guard index + 1 <= args.count,
+                      let date = dateFormatter.date(from: args[index + 1])
                 else {
                     throw CommandLineError.invalidDateFormat
                 }
@@ -65,33 +70,33 @@ struct CommandLineArguments {
                 currentDiastolic = nil
                 
             case "-steps":
-                guard index + 2 <= args.count,
-                      let steps = Int(args[index + 2])
+                guard index + 1 <= args.count,
+                      let steps = Int(args[index + 1])
                 else {
                     throw CommandLineError.invalidStepsValue
                 }
                 currentSteps = steps
                 
             case "-sodium":
-                guard index + 2 <= args.count,
-                      let sodium = Double(args[index + 2])
+                guard index + 1 <= args.count,
+                      let sodium = Double(args[index + 1])
                 else {
                     throw CommandLineError.invalidSodiumValue
                 }
                 currentSodium = sodium
                 
             case "-sleepHours":
-                guard index + 2 <= args.count,
-                      let hours = Double(args[index + 2])
+                guard index + 1 <= args.count,
+                      let hours = Double(args[index + 1])
                 else {
                     throw CommandLineError.invalidSleepHoursValue
                 }
                 currentSleepHours = hours
                 
             case "-bloodPressure":
-                guard index + 3 <= args.count,
-                      let systolic = Int(args[index + 2]),
-                      let diastolic = Int(args[index + 3])
+                guard index + 2 <= args.count,
+                      let systolic = Int(args[index + 1]),
+                      let diastolic = Int(args[index + 2])
                 else {
                     throw CommandLineError.invalidBloodPressureValue
                 }
@@ -126,4 +131,5 @@ enum CommandLineError: Error {
     case invalidSodiumValue
     case invalidSleepHoursValue
     case invalidBloodPressureValue
+    case invalidEnvironment
 }

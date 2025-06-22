@@ -18,7 +18,7 @@ struct HealthKitTestDataRegisterApp: App {
             isCliMode = true
         }
         catch {
-            print("No Param")
+            print("No Param: \(error)")
             isCliMode = false
         }
     }
@@ -39,28 +39,4 @@ struct HealthKitTestDataRegisterApp: App {
 
 extension EnvironmentValues {
     @Entry var healthRegisterDataArgs: CommandLineArguments = .init(healthDataArray: [])
-}
-
-struct CliRegisterModeView: View {
-    
-    @Environment(\.healthRegisterDataArgs) var healthRegisterDataArgs
-    @State var isSuccess = false
-    
-    var body: some View {
-        VStack {
-            Text(isSuccess ? "OK" : "NO")
-            Button("Register") {
-                Task {
-                    do {
-                        try await HealthKitManager.shared.authorization()
-                        try await HealthKitManager.shared.saveMultipleHealthData(healthRegisterDataArgs.healthDataArray)
-                        isSuccess = true
-                    }
-                    catch {
-                        print("error: \(error)")
-                    }
-                }
-            }
-        }
-    }
 }
